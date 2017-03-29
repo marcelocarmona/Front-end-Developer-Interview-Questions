@@ -48,7 +48,7 @@ The Solution
 
 We can solve this by wrapping our anonymous function in another anonymous function that takes btnNum as an argument. Like so:
 
-```
+```html
 <button id="btn-0">Button 1!</button>
 <button id="btn-1">Button 2!</button>
 <button id="btn-2">Button 3!</button>

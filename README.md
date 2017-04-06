@@ -135,3 +135,4 @@ This solution uses an IIFE to emulate block scoping. Since functions are JavaScr
 While this isn't idiomatic JavaScript, it does help give you an idea of just how flexible JavaScript can be.
 
 It is also worth noting that drafts of the ECMAScript 6 specification (the next version of JavaScript) include a let keyword which is used to define block-scoped variables. If you are interested in playing around with this proposed keyword, it is available in FireFox.
+

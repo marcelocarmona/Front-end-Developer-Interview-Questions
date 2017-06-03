@@ -1,7 +1,5 @@
 The console will log undefined.
-
 To understand this, we need to explain a few things about Javascript.
-
 Function-level scope. Functions create new scopes in Javascript:
 
 ```javascript

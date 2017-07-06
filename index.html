@@ -8,7 +8,7 @@ layout: default
 
     {% if question.title != "Solution" %}
     <li>
-      <a href="{{ question.url }}">{{ question.title }}</a>
+      <a href="{{ site.baseurl}}{{question.url }}">{{ question.title }}</a>
     </li>
     {% endif %}
     {% endfor %}

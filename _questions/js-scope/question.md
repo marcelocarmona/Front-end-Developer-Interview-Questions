@@ -1,7 +1,6 @@
 ---
 title: Js scope
 layout: question
-permalink: js-scope
 ---
 
 ### If we execute this Javascript, what will the browser's console show?

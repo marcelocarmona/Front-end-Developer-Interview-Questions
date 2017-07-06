@@ -1,7 +1,6 @@
 ---
 title: Closure web game
 layout: question
-permalink: closure-web-game
 ---
 
 ### We're building a web game where everybody wins and we are all friends forever.

@@ -20,3 +20,4 @@ markdown: kramdown
 collections:
   questions:
     output: true
+    permalink: /:path

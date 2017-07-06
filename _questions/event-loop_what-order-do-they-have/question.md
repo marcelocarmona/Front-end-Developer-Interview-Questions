@@ -1,7 +1,6 @@
 ---
 title: Event Loop - What order do they have
 layout: question
-permalink: event-loop_what-order-do-they-have
 ---
 
 

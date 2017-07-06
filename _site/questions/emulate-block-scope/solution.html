@@ -1,0 +1,33 @@
+<p>primary element is Air” instead of the actual result.</p>
+
+<p>This issue is easily avoided once you become aware of it. Avoiding variable declarations within blocks tends to prevent any confusion.</p>
+
+<p>But suppose that we really wanted to use block scoping in JavaScript. How would we go about it? We could do something like this.</p>
+
+<div class="language-javascript highlighter-rouge"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">avatar</span> <span class="o">=</span> <span class="s2">"Ang"</span><span class="p">;</span>
+<span class="kd">var</span> <span class="nx">element</span> <span class="o">=</span> <span class="s2">"Air"</span><span class="p">;</span>
+
+<span class="kd">var</span> <span class="nx">elements</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="s2">"Air"</span><span class="p">,</span>
+    <span class="s2">"Earth"</span><span class="p">,</span>
+    <span class="s2">"Fire"</span><span class="p">,</span>
+    <span class="s2">"Water"</span>
+<span class="p">];</span>
+
+<span class="k">for</span> <span class="p">(</span><span class="kd">var</span> <span class="nx">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">i</span> <span class="o">&lt;</span> <span class="nx">elements</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+    <span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+        <span class="kd">var</span> <span class="nx">element</span> <span class="o">=</span> <span class="nx">elements</span><span class="p">[</span><span class="nx">i</span><span class="p">];</span>
+        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">avatar</span> <span class="o">+</span> <span class="s2">" has mastered "</span> <span class="o">+</span> <span class="nx">element</span><span class="p">);</span>
+    <span class="p">})();</span>
+<span class="p">}</span>
+
+<span class="c1">// Outputs: "Ang's primary element is Air"</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">avatar</span> <span class="o">+</span> <span class="s2">"'s primary element is "</span> <span class="o">+</span> <span class="nx">element</span><span class="p">);</span>
+</code></pre>
+</div>
+
+<p>This solution uses an IIFE to emulate block scoping. Since functions are JavaScript’s scoping mechanism, we define and immediately invoke a new function on each pass through the loop, therefore approximating the behavior of a block scope.</p>
+
+<p>While this isn’t idiomatic JavaScript, it does help give you an idea of just how flexible JavaScript can be.</p>
+
+<p>It is also worth noting that drafts of the ECMAScript 6 specification (the next version of JavaScript) include a let keyword which is used to define block-scoped variables. If you are interested in playing around with this proposed keyword, it is available in FireFox.</p>

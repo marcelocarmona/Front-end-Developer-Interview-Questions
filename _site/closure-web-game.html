@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>Closure web game</title>
+  <meta name="description" content="We’re building a web game where everybody wins and we are all friends forever.It’s simple—you click on one of three boxes to see what nice thing you’ve won. ...">
+  <meta name="author" content="Marcelo Carmona">
+  <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+  <link rel="stylesheet" href="/css/main.css">
+  <link rel="canonical" href="http://localhost:4000/closure-web-game">
+  <link rel="alternate" type="application/rss+xml" title="Front end Developer Interview Questions" href="http://localhost:4000/feed.xml">
+
+  
+  <meta property="og:locale" content="en_US">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Closure web game">
+  <meta property="og:description" content="We’re building a web game where everybody wins and we are all friends forever.It’s simple—you click on one of three boxes to see what nice thing you’ve won. ...">
+  <meta property="og:url" content="http://localhost:4000/closure-web-game">
+  <meta property="og:site_name" content="Front end Developer Interview Questions">
+  <meta property="og:image" content="http://localhost:4000/img/marcelo.jpg">
+  <meta property="og:publisher" content="https://www.facebook.com/marcelocarmona">
+
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:site" content="@carmonamarcelo">
+  <meta name="twitter:title" content="Closure web game">
+  <meta name="twitter:description" content="We’re building a web game where everybody wins and we are all friends forever.It’s simple—you click on one of three boxes to see what nice thing you’ve won. ...">
+  <meta name="twitter:image" content="http://localhost:4000/img/og.jpg">
+  
+</head>
+
+
+  <body>
+
+    <header class="header">
+
+  <div class="wrapper">
+
+    <div class="header__profile">
+      <a href="/">
+        <img src="/img/marcelo.jpg" alt="Marcelo Carmona">
+      </a>
+    </div>
+
+  </div>
+
+</header>
+
+<div class="bio">
+  <p class="bio__name">Front end Developer Interview Questions</p>
+  <a href="https://twitter.com/carmonamarcelo" class="twitter-follow-button" data-show-count="false">Follow @carmonamarcelo</a>
+  <script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
+  <p class="bio__I-am">A list of helpful front-end related questions you can use to interview potential candidates, test yourself or completely ignore.
+</p>
+</div>
+
+
+    <div class="page-content">
+      <div class="page-content__list wrapper">
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+
+  <header class="post-header">
+    <h1 class="post__title" itemprop="name headline">Closure web game</h1>
+  </header>
+
+  <div class="post-content" itemprop="articleBody">
+    <h3 id="were-building-a-web-game-where-everybody-wins-and-we-are-all-friends-forever">We’re building a web game where everybody wins and we are all friends forever.</h3>
+<p>It’s simple—you click on one of three boxes to see what nice thing you’ve won. You always win something nice. Because we love you.</p>
+
+<p>Here’s what we have so far. Something’s going wrong though. Can you tell what it is?</p>
+
+<div class="language-html highlighter-rouge"><pre class="highlight"><code><span class="nt">&lt;button</span> <span class="na">id=</span><span class="s">"btn-0"</span><span class="nt">&gt;</span>Button 1!<span class="nt">&lt;/button&gt;</span>
+<span class="nt">&lt;button</span> <span class="na">id=</span><span class="s">"btn-1"</span><span class="nt">&gt;</span>Button 2!<span class="nt">&lt;/button&gt;</span>
+<span class="nt">&lt;button</span> <span class="na">id=</span><span class="s">"btn-2"</span><span class="nt">&gt;</span>Button 3!<span class="nt">&lt;/button&gt;</span>
+
+<span class="nt">&lt;script </span><span class="na">type=</span><span class="s">"text/javascript"</span><span class="nt">&gt;</span>
+    <span class="kd">var</span> <span class="nx">prizes</span> <span class="o">=</span> <span class="p">[</span><span class="s1">'A Unicorn!'</span><span class="p">,</span> <span class="s1">'A Hug!'</span><span class="p">,</span> <span class="s1">'Fresh Laundry!'</span><span class="p">];</span>
+    <span class="k">for</span> <span class="p">(</span><span class="kd">var</span> <span class="nx">btnNum</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">btnNum</span> <span class="o">&lt;</span> <span class="nx">prizes</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span> <span class="nx">btnNum</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+        <span class="c1">// for each of our buttons, when the user clicks it...</span>
+        <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s1">'btn-'</span> <span class="o">+</span> <span class="nx">btnNum</span><span class="p">).</span><span class="nx">onclick</span> <span class="o">=</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+            <span class="c1">// tell her what she's won!</span>
+            <span class="nx">alert</span><span class="p">(</span><span class="nx">prizes</span><span class="p">[</span><span class="nx">btnNum</span><span class="p">]);</span>
+        <span class="p">};</span>
+    <span class="p">}</span>
+<span class="nt">&lt;/script&gt;</span>
+</code></pre>
+</div>
+
+    <h1>Solution</h1>
+    <p>We can solve this by wrapping our anonymous function in another anonymous function that takes btnNum as an argument. Like so:</p>
+
+<div class="language-html highlighter-rouge"><pre class="highlight"><code><span class="nt">&lt;button</span> <span class="na">id=</span><span class="s">"btn-0"</span><span class="nt">&gt;</span>Button 1!<span class="nt">&lt;/button&gt;</span>
+<span class="nt">&lt;button</span> <span class="na">id=</span><span class="s">"btn-1"</span><span class="nt">&gt;</span>Button 2!<span class="nt">&lt;/button&gt;</span>
+<span class="nt">&lt;button</span> <span class="na">id=</span><span class="s">"btn-2"</span><span class="nt">&gt;</span>Button 3!<span class="nt">&lt;/button&gt;</span>
+
+<span class="nt">&lt;script </span><span class="na">type=</span><span class="s">"text/javascript"</span><span class="nt">&gt;</span>
+    <span class="kd">var</span> <span class="nx">prizes</span> <span class="o">=</span> <span class="p">[</span><span class="s1">'A Unicorn!'</span><span class="p">,</span> <span class="s1">'A Hug!'</span><span class="p">,</span> <span class="s1">'Fresh Laundry!'</span><span class="p">];</span>
+    <span class="k">for</span> <span class="p">(</span><span class="kd">var</span> <span class="nx">btnNum</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">btnNum</span> <span class="o">&lt;</span> <span class="nx">prizes</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span> <span class="nx">btnNum</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+        <span class="c1">// for each of our buttons, when the user clicks it...</span>
+        <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s1">'btn-'</span> <span class="o">+</span> <span class="nx">btnNum</span><span class="p">).</span><span class="nx">onclick</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">frozenBtnNum</span><span class="p">){</span>
+            <span class="k">return</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+                <span class="c1">// tell her what she's won!</span>
+                <span class="nx">alert</span><span class="p">(</span><span class="nx">prizes</span><span class="p">[</span><span class="nx">frozenBtnNum</span><span class="p">]);</span>
+            <span class="p">};</span>
+        <span class="p">}(</span><span class="nx">btnNum</span><span class="p">);</span> <span class="c1">// LOOK! We're passing btnNum to our anonymous function here!</span>
+    <span class="p">}</span>
+<span class="nt">&lt;/script&gt;</span>
+</code></pre>
+</div>
+
+<p>This “freezes” the value of btnNum. Why? Well…</p>
+
+<p>So when we pass btnNum to the outer anonymous function as its one argument, we create a new number inside the outer anonymous function called frozenBtnNum that has the value that btnNum had at that moment (0, 1, or 2).</p>
+
+<p>Our inner anonymous function is still a closure because it still reaches outside its scope, but now it closes over this new number called frozenBtnNum, whose value will not change as we iterate through our for loop.</p>
+
+<p><b>What We Learned</b></p>
+
+<p>Like several common interview questions, this question hinges on a solid understanding of closures and pass by reference vs pass by value. If you’re shaky on either of those, look back at the examples in the solution.</p>
+
+  </div>
+
+
+</article>
+
+      </div>
+    </div>
+
+    <footer class="footer">
+  <div class="wrapper">
+    <p>
+      <a href="//twitter.com/carmonamarcelo" target="_blank">
+        <img src="/img/icons/twitter.svg" alt="Marcelo Carmona on Twitter">
+      </a>
+      <a href="//github.com/marcelocarmona" target="_blank">
+        <img src="/img/icons/github.svg" alt="Marcelo Carmona on GitHub">
+      </a>
+    </p>
+  </div>
+</footer>
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-83688441-1', 'auto');
+  ga('send', 'pageview');
+
+</script>
+
+
+  </body>
+
+</html>

@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>Event Loop - What order do they have</title>
+  <meta name="description" content="In what order will the numbers 1-4 be logged to the console when the code below is executed? Why?">
+  <meta name="author" content="Marcelo Carmona">
+  <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+  <link rel="stylesheet" href="/css/main.css">
+  <link rel="canonical" href="http://localhost:4000/event-loop_what-order-do-they-have">
+  <link rel="alternate" type="application/rss+xml" title="Front end Developer Interview Questions" href="http://localhost:4000/feed.xml">
+
+  
+  <meta property="og:locale" content="en_US">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Event Loop - What order do they have">
+  <meta property="og:description" content="In what order will the numbers 1-4 be logged to the console when the code below is executed? Why?">
+  <meta property="og:url" content="http://localhost:4000/event-loop_what-order-do-they-have">
+  <meta property="og:site_name" content="Front end Developer Interview Questions">
+  <meta property="og:image" content="http://localhost:4000/img/marcelo.jpg">
+  <meta property="og:publisher" content="https://www.facebook.com/marcelocarmona">
+
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:site" content="@carmonamarcelo">
+  <meta name="twitter:title" content="Event Loop - What order do they have">
+  <meta name="twitter:description" content="In what order will the numbers 1-4 be logged to the console when the code below is executed? Why?">
+  <meta name="twitter:image" content="http://localhost:4000/img/og.jpg">
+  
+</head>
+
+
+  <body>
+
+    <header class="header">
+
+  <div class="wrapper">
+
+    <div class="header__profile">
+      <a href="/">
+        <img src="/img/marcelo.jpg" alt="Marcelo Carmona">
+      </a>
+    </div>
+
+  </div>
+
+</header>
+
+<div class="bio">
+  <p class="bio__name">Front end Developer Interview Questions</p>
+  <a href="https://twitter.com/carmonamarcelo" class="twitter-follow-button" data-show-count="false">Follow @carmonamarcelo</a>
+  <script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
+  <p class="bio__I-am">A list of helpful front-end related questions you can use to interview potential candidates, test yourself or completely ignore.
+</p>
+</div>
+
+
+    <div class="page-content">
+      <div class="page-content__list wrapper">
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+
+  <header class="post-header">
+    <h1 class="post__title" itemprop="name headline">Event Loop - What order do they have</h1>
+  </header>
+
+  <div class="post-content" itemprop="articleBody">
+    <h3 id="in-what-order-will-the-numbers-1-4-be-logged-to-the-console-when-the-code-below-is-executed-why">In what order will the numbers 1-4 be logged to the console when the code below is executed? Why?</h3>
+
+<div class="language-javascript highlighter-rouge"><pre class="highlight"><code><span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span> 
+    <span class="nx">setTimeout</span><span class="p">(</span><span class="kd">function</span><span class="p">(){</span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="mi">2</span><span class="p">)},</span> <span class="mi">1000</span><span class="p">);</span> 
+    <span class="nx">setTimeout</span><span class="p">(</span><span class="kd">function</span><span class="p">(){</span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="mi">3</span><span class="p">)},</span> <span class="mi">0</span><span class="p">);</span> 
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="mi">4</span><span class="p">);</span>
+<span class="p">})();</span>
+</code></pre>
+</div>
+
+    <h1>Solution</h1>
+    <p>The values will be logged in the following order:</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>1
+4
+3
+2
+</code></pre>
+</div>
+
+<p>Let’s first explain the parts of this that are presumably more obvious:</p>
+
+<p><code class="highlighter-rouge">1</code> and <code class="highlighter-rouge">4</code> are displayed first since they are logged by simple calls to <code class="highlighter-rouge">console.log()</code> without any delay
+<code class="highlighter-rouge">2</code> is displayed after <code class="highlighter-rouge">3</code> because <code class="highlighter-rouge">2</code> is being logged after a delay of 1000 msecs (i.e., 1 second) whereas <code class="highlighter-rouge">3</code> is being logged after a delay of 0 msecs.
+OK, fine. But if <code class="highlighter-rouge">3</code> is being logged after a delay of 0 msecs, doesn’t that mean that it is being logged right away? And, if so, shouldn’t it be logged before <code class="highlighter-rouge">4</code>, since <code class="highlighter-rouge">4</code> is being logged by a later line of code?</p>
+
+<p>The answer has to do with properly understanding <a href="http://javascript.info/settimeout-setinterval">JavaScript events and timing</a>.</p>
+
+<p>The browser has an event loop which checks the event queue and processes pending events. For example, if an event happens in the background (e.g., a script onload event) while the browser is busy (e.g., processing an onclick), the event gets appended to the queue. When the onclick handler is complete, the queue is checked and the event is then handled (e.g., the onload script is executed).</p>
+
+<p>Similarly, <code class="highlighter-rouge">setTimeout()</code> also puts execution of its referenced function into the event queue if the browser is busy.</p>
+
+<p>When a value of zero is passed as the second argument to <code class="highlighter-rouge">setTimeout()</code>, it attempts to execute the specified function “as soon as possible”. Specifically, execution of the function is placed on the event queue to occur on the next timer tick. Note, though, that this is not immediate; the function is not executed until the next tick. That’s why in the above example, the call to <code class="highlighter-rouge">console.log(4)</code> occurs before the call to <code class="highlighter-rouge">console.log(3)</code> (since the call to <code class="highlighter-rouge">console.log(3)</code> is invoked via setTimeout, so it is slightly delayed).</p>
+
+  </div>
+
+
+</article>
+
+      </div>
+    </div>
+
+    <footer class="footer">
+  <div class="wrapper">
+    <p>
+      <a href="//twitter.com/carmonamarcelo" target="_blank">
+        <img src="/img/icons/twitter.svg" alt="Marcelo Carmona on Twitter">
+      </a>
+      <a href="//github.com/marcelocarmona" target="_blank">
+        <img src="/img/icons/github.svg" alt="Marcelo Carmona on GitHub">
+      </a>
+    </p>
+  </div>
+</footer>
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-83688441-1', 'auto');
+  ga('send', 'pageview');
+
+</script>
+
+
+  </body>
+
+</html>

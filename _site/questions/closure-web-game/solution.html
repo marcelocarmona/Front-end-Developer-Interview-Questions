@@ -1,0 +1,30 @@
+<p>We can solve this by wrapping our anonymous function in another anonymous function that takes btnNum as an argument. Like so:</p>
+
+<div class="language-html highlighter-rouge"><pre class="highlight"><code><span class="nt">&lt;button</span> <span class="na">id=</span><span class="s">"btn-0"</span><span class="nt">&gt;</span>Button 1!<span class="nt">&lt;/button&gt;</span>
+<span class="nt">&lt;button</span> <span class="na">id=</span><span class="s">"btn-1"</span><span class="nt">&gt;</span>Button 2!<span class="nt">&lt;/button&gt;</span>
+<span class="nt">&lt;button</span> <span class="na">id=</span><span class="s">"btn-2"</span><span class="nt">&gt;</span>Button 3!<span class="nt">&lt;/button&gt;</span>
+
+<span class="nt">&lt;script </span><span class="na">type=</span><span class="s">"text/javascript"</span><span class="nt">&gt;</span>
+    <span class="kd">var</span> <span class="nx">prizes</span> <span class="o">=</span> <span class="p">[</span><span class="s1">'A Unicorn!'</span><span class="p">,</span> <span class="s1">'A Hug!'</span><span class="p">,</span> <span class="s1">'Fresh Laundry!'</span><span class="p">];</span>
+    <span class="k">for</span> <span class="p">(</span><span class="kd">var</span> <span class="nx">btnNum</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">btnNum</span> <span class="o">&lt;</span> <span class="nx">prizes</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span> <span class="nx">btnNum</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+        <span class="c1">// for each of our buttons, when the user clicks it...</span>
+        <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s1">'btn-'</span> <span class="o">+</span> <span class="nx">btnNum</span><span class="p">).</span><span class="nx">onclick</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">frozenBtnNum</span><span class="p">){</span>
+            <span class="k">return</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+                <span class="c1">// tell her what she's won!</span>
+                <span class="nx">alert</span><span class="p">(</span><span class="nx">prizes</span><span class="p">[</span><span class="nx">frozenBtnNum</span><span class="p">]);</span>
+            <span class="p">};</span>
+        <span class="p">}(</span><span class="nx">btnNum</span><span class="p">);</span> <span class="c1">// LOOK! We're passing btnNum to our anonymous function here!</span>
+    <span class="p">}</span>
+<span class="nt">&lt;/script&gt;</span>
+</code></pre>
+</div>
+
+<p>This “freezes” the value of btnNum. Why? Well…</p>
+
+<p>So when we pass btnNum to the outer anonymous function as its one argument, we create a new number inside the outer anonymous function called frozenBtnNum that has the value that btnNum had at that moment (0, 1, or 2).</p>
+
+<p>Our inner anonymous function is still a closure because it still reaches outside its scope, but now it closes over this new number called frozenBtnNum, whose value will not change as we iterate through our for loop.</p>
+
+<p><b>What We Learned</b></p>
+
+<p>Like several common interview questions, this question hinges on a solid understanding of closures and pass by reference vs pass by value. If you’re shaky on either of those, look back at the examples in the solution.</p>

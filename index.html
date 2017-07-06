@@ -1,0 +1,16 @@
+---
+layout: default
+---
+
+<div class="home">
+  <ul class="post__list">
+    {% for question in site.questions %}
+
+    {% if question.title != "Solution" %}
+    <li>
+      <a href="{{ question.url }}">{{ question.title }}</a>
+    </li>
+    {% endif %}
+    {% endfor %}
+  </ul>
+</div>

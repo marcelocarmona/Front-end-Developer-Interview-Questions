@@ -1,0 +1,68 @@
+<p>The console will log undefined.
+To understand this, we need to explain a few things about Javascript.
+Function-level scope. Functions create new scopes in Javascript:</p>
+
+<div class="language-javascript highlighter-rouge"><pre class="highlight"><code>  <span class="kd">function</span> <span class="nx">setVar</span><span class="p">(){</span>
+    <span class="c1">// inside this function we have a new scope</span>
+    <span class="c1">// so this variable, declared in this function's scope, won't be available outside the function</span>
+    <span class="kd">var</span> <span class="nx">varInFunction</span> <span class="o">=</span> <span class="s1">'inside a function'</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="nx">setVar</span><span class="p">();</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">varInFunction</span><span class="p">);</span>  <span class="c1">// throws 'ReferenceError: varInFunction is not defined'</span>
+</code></pre>
+</div>
+<p>Blocks like if statements and for loops do not create a new scope (this is also true of Python and recent versions of Ruby, but untrue of Java and C):</p>
+
+<div class="language-javascript highlighter-rouge"><pre class="highlight"><code>  <span class="k">if</span> <span class="p">(</span><span class="kc">true</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// this if statement doesn't create a new scope</span>
+    <span class="c1">// so varInIf is available in the global scope</span>
+    <span class="kd">var</span> <span class="nx">varInIf</span> <span class="o">=</span> <span class="s1">'inside an if statement'</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">varInIf</span><span class="p">);</span>  <span class="c1">// logs 'inside an if statement'</span>
+</code></pre>
+</div>
+
+<p>Declaration vs. assignment. A variable declaration simply tells the interpreter that a variable exists. By default it initializes the variable to undefined:</p>
+<div class="language-javascript highlighter-rouge"><pre class="highlight"><code>  <span class="kd">var</span> <span class="nx">unicorn</span><span class="p">;</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">unicorn</span><span class="p">);</span>  <span class="c1">// logs undefined (NOT a ReferenceError)</span>
+</code></pre>
+</div>
+
+<p>A variable assignment assigns a value to the variable:</p>
+
+<div class="language-javascript highlighter-rouge"><pre class="highlight"><code>  <span class="nx">unicorn</span> <span class="o">=</span> <span class="s1">'Sparkles McGiggleton'</span><span class="p">;</span>
+</code></pre>
+</div>
+
+<p>We can both declare and assign in the same line:</p>
+<div class="language-javascript highlighter-rouge"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">centaur</span> <span class="o">=</span> <span class="s1">'Horsey McPersonhead'</span><span class="p">;</span>
+</code></pre>
+</div>
+
+<p>Hoisting. In Javascript, variable declarations are “hoisted” to the top of the current scope. Variable assignments, however, are not.</p>
+
+<p>So returning to the original problem:</p>
+
+<div class="language-javascript highlighter-rouge"><pre class="highlight"><code>  <span class="kd">var</span> <span class="nx">text</span> <span class="o">=</span> <span class="s1">'outside'</span><span class="p">;</span>
+<span class="kd">function</span> <span class="nx">logIt</span><span class="p">(){</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">text</span><span class="p">);</span>
+    <span class="kd">var</span> <span class="nx">text</span> <span class="o">=</span> <span class="s1">'inside'</span><span class="p">;</span>
+<span class="p">};</span>
+<span class="nx">logIt</span><span class="p">();</span>
+</code></pre>
+</div>
+
+<p>The declaration (but not the assignment) of text gets hoisted to the top of logIt(). So our code gets interpreted as though it were:</p>
+
+<div class="language-javascript highlighter-rouge"><pre class="highlight"><code>  <span class="kd">var</span> <span class="nx">text</span> <span class="o">=</span> <span class="s1">'outside'</span><span class="p">;</span>
+<span class="kd">function</span> <span class="nx">logIt</span><span class="p">(){</span>
+    <span class="kd">var</span> <span class="nx">text</span><span class="p">;</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">text</span><span class="p">);</span>
+    <span class="nx">text</span> <span class="o">=</span> <span class="s1">'inside'</span><span class="p">;</span>
+<span class="p">};</span>
+<span class="nx">logIt</span><span class="p">();</span>
+</code></pre>
+</div>
+
+<p>So we have a new variable text inside of logIt() that is initialized to undefined, which is what it holds when we hit our log statement.</p>
+

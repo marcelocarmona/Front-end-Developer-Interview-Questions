@@ -1,0 +1,22 @@
+<p>The values will be logged in the following order:</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>1
+4
+3
+2
+</code></pre>
+</div>
+
+<p>Let’s first explain the parts of this that are presumably more obvious:</p>
+
+<p><code class="highlighter-rouge">1</code> and <code class="highlighter-rouge">4</code> are displayed first since they are logged by simple calls to <code class="highlighter-rouge">console.log()</code> without any delay
+<code class="highlighter-rouge">2</code> is displayed after <code class="highlighter-rouge">3</code> because <code class="highlighter-rouge">2</code> is being logged after a delay of 1000 msecs (i.e., 1 second) whereas <code class="highlighter-rouge">3</code> is being logged after a delay of 0 msecs.
+OK, fine. But if <code class="highlighter-rouge">3</code> is being logged after a delay of 0 msecs, doesn’t that mean that it is being logged right away? And, if so, shouldn’t it be logged before <code class="highlighter-rouge">4</code>, since <code class="highlighter-rouge">4</code> is being logged by a later line of code?</p>
+
+<p>The answer has to do with properly understanding <a href="http://javascript.info/settimeout-setinterval">JavaScript events and timing</a>.</p>
+
+<p>The browser has an event loop which checks the event queue and processes pending events. For example, if an event happens in the background (e.g., a script onload event) while the browser is busy (e.g., processing an onclick), the event gets appended to the queue. When the onclick handler is complete, the queue is checked and the event is then handled (e.g., the onload script is executed).</p>
+
+<p>Similarly, <code class="highlighter-rouge">setTimeout()</code> also puts execution of its referenced function into the event queue if the browser is busy.</p>
+
+<p>When a value of zero is passed as the second argument to <code class="highlighter-rouge">setTimeout()</code>, it attempts to execute the specified function “as soon as possible”. Specifically, execution of the function is placed on the event queue to occur on the next timer tick. Note, though, that this is not immediate; the function is not executed until the next tick. That’s why in the above example, the call to <code class="highlighter-rouge">console.log(4)</code> occurs before the call to <code class="highlighter-rouge">console.log(3)</code> (since the call to <code class="highlighter-rouge">console.log(3)</code> is invoked via setTimeout, so it is slightly delayed).</p>

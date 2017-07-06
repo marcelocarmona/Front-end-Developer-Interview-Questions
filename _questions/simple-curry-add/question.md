@@ -1,7 +1,7 @@
 ---
 title: Simple curry add
 layout: question
-permalink: /simple-curry-add
+permalink: simple-curry-add
 ---
 
 ### How would you make this work?

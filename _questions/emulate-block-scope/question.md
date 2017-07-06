@@ -1,7 +1,7 @@
 ---
 title: Emulate block scope
 layout: question
-permalink: /emulate-block-scope
+permalink: emulate-block-scope
 ---
 
 ### Emulating Block Scope in JavaScript

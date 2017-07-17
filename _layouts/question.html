@@ -9,9 +9,21 @@ layout: default
 
   <div class="post-content" itemprop="articleBody">
     {{ content }}
-    <h1>Solution</h1>
-    {{ page.next | markdownify }}
+    <h1><a href="javascript:toggleSolution();">Solution</a></h1>
+    <section id="solution-section">
+      {{ page.next | markdownify }}
+    </section>
   </div>
 
-
 </article>
+
+<script>
+  var solution = document.querySelector('#solution-section');
+  solution.style.display = 'none';
+
+  function toggleSolution() {
+    solution.style.display == 'none'
+        ? solution.style.display='block'
+        : solution.style.display='none';
+  }
+</script>

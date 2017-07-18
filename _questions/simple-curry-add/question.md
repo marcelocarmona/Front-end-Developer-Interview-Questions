@@ -2,6 +2,7 @@
 title: Simple curry add
 layout: question
 permalink: simple-curry-add
+tags: intermediate-level
 ---
 
 ### How would you make this work?

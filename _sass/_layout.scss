@@ -138,6 +138,11 @@
     padding-bottom: 30px;
     text-align: center;
 
+    .tag {
+      float: right;
+      font-size: small;
+    }
+
     &:not(:last-child) {
       border-bottom: 1px solid #e8e8e8;
     }

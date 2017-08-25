@@ -134,13 +134,16 @@
   margin-left: 0;
   list-style: none;
   >li {
-    margin-bottom: 30px;
-    padding-bottom: 30px;
-    text-align: center;
+    padding: 10px 0;
 
     .tag {
+      font-size: 12px;
+      padding: 1px 5px;
       float: right;
-      font-size: small;
+      color: white;
+      line-height: 15px;
+      background-color: #ABBAC3;
+      margin: 5px 2px;
     }
 
     &:not(:last-child) {

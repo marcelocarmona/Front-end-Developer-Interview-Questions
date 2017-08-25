@@ -2,6 +2,7 @@
 title: Emulate block scope
 layout: question
 permalink: emulate-block-scope
+tags: intermediate
 ---
 
 ### Emulating Block Scope in JavaScript

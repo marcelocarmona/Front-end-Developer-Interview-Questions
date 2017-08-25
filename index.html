@@ -8,11 +8,9 @@ layout: default
       {% if question.title != "Solution" %}
         <li>
           <a href="{{ site.baseurl}}{{question.url }}">{{ question.title }}</a>
-          <div>
-            {% for tag in question.tags %}
-              <span class="tag">{{tag}}</span>
-            {% endfor %}
-          </div>
+          {% for tag in question.tags %}
+            <span class="tag">{{tag}}</span>
+          {% endfor %}
         </li>
       {% endif %}
     {% endfor %}

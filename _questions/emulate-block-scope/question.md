@@ -2,7 +2,7 @@
 title: Emulate block scope
 layout: question
 permalink: emulate-block-scope
-tags: intermediate
+tags: intermediate Closure IIFE es6-let
 ---
 
 ### Emulating Block Scope in JavaScript

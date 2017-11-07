@@ -2,7 +2,7 @@
 title: Build functions
 layout: question
 permalink: build-functions
-tags: intermediate
+tags: intermediate Closure IIFE es6-let
 ---
 
 ### We're building a function that return an array of functions

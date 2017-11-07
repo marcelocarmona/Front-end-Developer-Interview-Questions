@@ -2,7 +2,7 @@
 title: Closure web game
 layout: question
 permalink: closure-web-game
-tags: intermediate
+tags: intermediate Closure IIFE es6-let
 ---
 
 ### We're building a web game where everybody wins and we are all friends forever.

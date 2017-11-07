@@ -2,7 +2,7 @@
 title: Js scope
 layout: question
 permalink: js-scope
-tags: intermediate
+tags: intermediate hoisting
 ---
 
 ### If we execute this Javascript, what will the browser's console show?

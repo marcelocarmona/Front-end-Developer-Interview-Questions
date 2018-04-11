@@ -6,11 +6,13 @@ layout: default
   <ul class="post__list">
     {% for question in site.questions %}
       {% if question.title != "Solution" %}
-        <li>
+        <li class="post__list__item">
           <a href="{{ site.baseurl}}{{question.url }}">{{ question.title }}</a>
-          {% for tag in question.tags %}
-            <span class="tag">{{tag}}</span>
-          {% endfor %}
+          <div>
+            {% for tag in question.tags %}
+              <span class="tag">{{tag}}</span>
+            {% endfor %}
+          </div>
         </li>
       {% endif %}
     {% endfor %}
